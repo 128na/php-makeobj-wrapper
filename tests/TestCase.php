@@ -11,7 +11,7 @@ class TestCase extends FrameworkTestCase
     protected function getSUT(): Makeobj
     {
         $path = realpath(__DIR__.$_ENV['makeobj_path']);
-        dump($_ENV['makeobj_path'], $path);
+        var_dump($_ENV['makeobj_path'], $path);
 
         return new Makeobj(new MakeobjDriver($path));
     }
