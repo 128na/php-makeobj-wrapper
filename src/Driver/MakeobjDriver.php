@@ -19,7 +19,12 @@ class MakeobjDriver
 
     protected function exec(string $baseDir, string $command, ?string $option = self::OPTION_QUIET, int $exptectedCode = 0): MakeobjResponse
     {
-        $command = sprintf('%s %s %s 2>&1', $this->makeobjPath, $option, $command);
+        $command = sprintf(
+            '%s %s %s 2>&1',
+            escapeshellcmd($this->makeobjPath),
+            escapeshellcmd($option),
+            escapeshellcmd($command)
+        );
 
         if ($baseDir) {
             $current = getcwd();
@@ -31,7 +36,6 @@ class MakeobjDriver
         if (isset($current)) {
             chdir($current);
         }
-        array_pop($output);
 
         return new MakeobjResponse($command, $output, $code);
     }

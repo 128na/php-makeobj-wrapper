@@ -8,7 +8,7 @@ class DumpTest extends TestCase
 {
     public function test()
     {
-        $path = __DIR__.'/example/example.pak';
+        $path = __DIR__.'/example/example.all.pak';
         $res = $this->getSUT()->dump([$path]);
 
         $this->assertEquals(0, $res->getCode());
