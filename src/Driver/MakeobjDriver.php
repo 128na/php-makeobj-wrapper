@@ -17,15 +17,8 @@ class MakeobjDriver
         $this->makeobjPath = $makeobjPath;
     }
 
-    protected function exec(string $baseDir, string $command, ?string $option = self::OPTION_QUIET, int $exptectedCode = 0): MakeobjResponse
+    protected function exec(string $baseDir, string $command): MakeobjResponse
     {
-        $command = sprintf(
-            '%s %s %s 2>&1',
-            escapeshellcmd($this->makeobjPath),
-            escapeshellcmd($option),
-            escapeshellcmd($command)
-        );
-
         if ($baseDir) {
             $current = getcwd();
             chdir($baseDir);
@@ -41,11 +34,27 @@ class MakeobjDriver
     }
 
     /**
+     * コマンド化.
+     */
+    public function toCommand(string $command, ?string $option = self::OPTION_QUIET): string
+    {
+        return sprintf(
+            '%s %s %s 2>&1',
+            escapeshellcmd($this->makeobjPath),
+            escapeshellcmd($option),
+            escapeshellcmd($command)
+        );
+    }
+
+    /**
      * MakeObj.
      */
     public function version(): MakeobjResponse
     {
-        return $this->exec('', '', self::OPTION_NONE);
+        return $this->exec(
+            '',
+            $this->toCommand('', self::OPTION_NONE)
+        );
     }
 
     /*
@@ -53,7 +62,10 @@ class MakeobjDriver
      */
     public function capabilities(): MakeobjResponse
     {
-        return $this->exec('', 'CAPABILITIES');
+        return $this->exec(
+            '',
+            $this->toCommand('CAPABILITIES')
+        );
     }
 
     /*
@@ -61,7 +73,10 @@ class MakeobjDriver
      */
     public function list(array $pakFiles): MakeobjResponse
     {
-        return $this->exec('', sprintf('LIST %s', implode(' ', $pakFiles)));
+        return $this->exec(
+            '',
+            $this->toCommand(sprintf('LIST %s', implode(' ', $pakFiles)))
+        );
     }
 
     /*
@@ -69,10 +84,11 @@ class MakeobjDriver
      */
     public function pak(int $size, string $dirPath, string $pakFile, array $datFiles, bool $debug = false): MakeobjResponse
     {
+        $option = $debug ? self::OPTION_DEBUG : self::OPTION_QUIET;
+
         return $this->exec(
             $dirPath,
-            sprintf('PAK%d %s %s', $size, $pakFile, implode(' ', $datFiles)),
-            $debug ? self::OPTION_DEBUG : self::OPTION_QUIET
+            $this->toCommand(sprintf('PAK%d %s %s', $size, $pakFile, implode(' ', $datFiles)), $option)
         );
     }
 
@@ -81,7 +97,10 @@ class MakeobjDriver
      */
     public function dump(array $pakFiles): MakeobjResponse
     {
-        return $this->exec('', sprintf('DUMP %s', implode(' ', $pakFiles)));
+        return $this->exec(
+            '',
+            $this->toCommand(sprintf('DUMP %s', implode(' ', $pakFiles)))
+        );
     }
 
     /*
@@ -89,7 +108,10 @@ class MakeobjDriver
      */
     public function merge(string $pakFileLibrary, array $pakFiles): MakeobjResponse
     {
-        return $this->exec('', sprintf('MERGE %s %s', $pakFileLibrary, implode(' ', $pakFiles)));
+        return $this->exec(
+            '',
+            $this->toCommand(sprintf('MERGE %s %s', $pakFileLibrary, implode(' ', $pakFiles)))
+        );
     }
 
     /*
@@ -97,7 +119,10 @@ class MakeobjDriver
      */
     public function extract(string $workdir, string $pakFileArchivcde): MakeobjResponse
     {
-        return $this->exec($workdir, sprintf('EXTRACT %s', $pakFileArchivcde));
+        return $this->exec(
+            $workdir,
+            $this->toCommand(sprintf('EXTRACT %s', $pakFileArchivcde))
+        );
     }
 
     /*
