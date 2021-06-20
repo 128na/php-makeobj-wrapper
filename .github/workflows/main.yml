@@ -28,7 +28,7 @@ jobs:
       - name: check makeojb dependencies
         run: ldd ./bin/makeobj-linux-60-2/makeobj
       - name: check makeojb
-        run: ./bin/makeobj-linux-60-2/makeobj
+        run: chmod -R 777 ./bin && ./bin/makeobj-linux-60-2/makeobj
 
       - name: PHP
         uses: shivammathur/setup-php@v2
