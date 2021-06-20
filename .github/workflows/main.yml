@@ -20,8 +20,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: home
-        run: cd ~ && pwd
+      - name: confirm
+        run: ls -la /home/runner/work/php-makeobj-wrapper/php-makeobj-wrapper/tests/../bin/makeobj-linux-60-2/
 
       - name: chmod
         run: chmod -R 777 ./
