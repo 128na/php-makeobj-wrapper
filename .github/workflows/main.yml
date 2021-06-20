@@ -20,6 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: home
+        run: ls ~
+
       - name: chmod
         run: chmod -R 777 ./
       - name: install makeobj dependencies
