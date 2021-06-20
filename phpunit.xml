@@ -12,6 +12,6 @@
   </testsuites>
   <php>
     <ini name="memory_limit" value="-1"/>
-    <env name="makeobj_path" value="/../bin/makeobj-win-60-5/Makeobj.exe"/>
+    <env name="makeobj_path" value="/../bin/makeobj-win-60-5/makeobj.exe"/>
   </php>
 </phpunit>
