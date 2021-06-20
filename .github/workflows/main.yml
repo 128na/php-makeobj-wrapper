@@ -20,7 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: setup deps
+      - name: install makeobj dependencies
+        run: apt install -y libpng12-devel
+      - name: check makeojb dependencies
         run: ldd ./bin/makeobj-linux-60-2/makeobj
 
       - name: PHP
