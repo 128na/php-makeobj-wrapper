@@ -45,4 +45,4 @@ jobs:
       - name: Composer Install
         run: composer install
       - name: Test
-        run: ./vendor/bin/phpunit -c phpunit.linux.xml -v
+        run: sudo ./vendor/bin/phpunit -c phpunit.linux.xml -v
