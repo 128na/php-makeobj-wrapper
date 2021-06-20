@@ -10,7 +10,6 @@ class VersionTest extends TestCase
     {
         $makeobj = $this->getSUT();
         $res = $makeobj->version();
-        var_dump($res);
 
         $this->assertEquals(3, $res->getCode());
         $this->assertInstanceOf(MakeobjResponse::class, $res);
