@@ -10,9 +10,9 @@ class TestCase extends FrameworkTestCase
 {
     protected function getSUT(): Makeobj
     {
-        $path = realpath(__DIR__.$_ENV['makeobj_path']);
-        if (!$path) {
-            throw new \Exception('Invalid path provided. '.__DIR__.$_ENV['makeobj_path']);
+        $path = null;
+        if (isset($_ENV['makeobj_path'])) {
+            $path = realpath(__DIR__.$_ENV['makeobj_path']);
         }
 
         return new Makeobj(new MakeobjDriver($path));

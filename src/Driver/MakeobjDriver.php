@@ -12,9 +12,9 @@ class MakeobjDriver
 
     protected string $makeobjPath;
 
-    public function __construct(string $makeobjPath)
+    public function __construct(?string $makeobjPath = null)
     {
-        $this->makeobjPath = $makeobjPath;
+        $this->makeobjPath = $makeobjPath ?? realpath(__DIR__.'/../../bin/makeobj-linux-60-2/makeobj');
     }
 
     protected function exec(string $baseDir, string $command): MakeobjResponse
