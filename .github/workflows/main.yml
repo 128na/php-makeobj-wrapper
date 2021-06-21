@@ -20,6 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: check makeobj
+        run: ./bin/makeobj-win-60-5/makeobj.exe CAPABILITIES
+
       - name: PHP
         uses: shivammathur/setup-php@v2
         with:
