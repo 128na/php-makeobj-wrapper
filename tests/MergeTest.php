@@ -15,16 +15,15 @@ class MergeTest extends TestCase
 
     public function test()
     {
-        $path1 = __DIR__.'/example/example1.pak';
-        $path2 = __DIR__.'/example/example2.pak';
-        $merged = __DIR__.'/example/merged.pak';
-        $this->assertFalse(file_exists($merged));
+        $dir = __DIR__.'/example';
+        $pakFile = 'example1.pak example2.pak';
+        $pakFileLibrary = 'merged.pak';
 
-        $res = $this->getSUT()->merge($merged, [$path1, $path2]);
+        $res = $this->getSUT()->merge($dir, $pakFileLibrary, $pakFile);
 
         $this->assertEquals(0, $res->getCode());
         $this->assertInstanceOf(MakeobjResponse::class, $res);
-        $this->assertTrue(file_exists($merged));
+        $this->assertTrue(file_exists($dir.'/'.$pakFileLibrary));
         $this->assertStringContainsString('merged.pak', $res->getStdOut());
     }
 }

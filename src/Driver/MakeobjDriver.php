@@ -83,9 +83,9 @@ abstract class MakeobjDriver
     public function version(): MakeobjResponse
     {
         return $this->exec(
-        '',
-        $this->toCommand('', self::OPTION_NONE)
-    );
+            '',
+            $this->toCommand('', self::OPTION_NONE)
+        );
     }
 
     /*
@@ -94,70 +94,70 @@ abstract class MakeobjDriver
     public function capabilities(): MakeobjResponse
     {
         return $this->exec(
-        '',
-        $this->toCommand('CAPABILITIES')
-    );
+            '',
+            $this->toCommand('CAPABILITIES')
+        );
     }
 
     /*
     * MakeObj LIST <pak file(s)>.
     */
-    public function list(array $pakFiles): MakeobjResponse
+    public function list(string $dir, string $pakFile): MakeobjResponse
     {
         return $this->exec(
-        '',
-        $this->toCommand(sprintf('LIST %s', implode(' ', $pakFiles)))
-    );
+            $dir,
+            $this->toCommand(sprintf('LIST %s', $pakFile))
+        );
     }
 
     /*
     * MakeObj PAK <pak file> <dat file(s)>.
     */
-    public function pak(int $size, string $dirPath, string $pakFile, array $datFiles, bool $debug = false): MakeobjResponse
+    public function pak(string $dir, int $size, string $pakFile, string $datFile, bool $debug = false): MakeobjResponse
     {
         $option = $debug ? self::OPTION_DEBUG : self::OPTION_QUIET;
 
         return $this->exec(
-        $dirPath,
-        $this->toCommand(sprintf('PAK%d %s %s', $size, $pakFile, implode(' ', $datFiles)), $option)
-    );
+            $dir,
+            $this->toCommand(sprintf('PAK%d %s %s', $size, $pakFile, $datFile), $option)
+        );
     }
 
     /*
     * MakeObj DUMP <pak file> <pak file(s)>.
     */
-    public function dump(array $pakFiles): MakeobjResponse
+    public function dump(string $dir, string $pakFile): MakeobjResponse
     {
         return $this->exec(
-        '',
-        $this->toCommand(sprintf('DUMP %s', implode(' ', $pakFiles)))
-    );
+            $dir,
+            $this->toCommand(sprintf('DUMP %s', $pakFile))
+        );
     }
 
     /*
     * MakeObj MERGE <pak file library> <pak file(s)>.
     */
-    public function merge(string $pakFileLibrary, array $pakFiles): MakeobjResponse
+    public function merge(string $dir, string $pakFileLibrary, string $pakFile): MakeobjResponse
     {
         return $this->exec(
-        '',
-        $this->toCommand(sprintf('MERGE %s %s', $pakFileLibrary, implode(' ', $pakFiles)))
-    );
+            $dir,
+            $this->toCommand(sprintf('MERGE %s %s', $pakFileLibrary, $pakFile))
+        );
     }
 
     /*
     * MakeObj EXTRACT <pak file archive>.
     */
-    public function extract(string $workdir, string $pakFileArchivcde): MakeobjResponse
+    public function extract(string $dir, string $pakFileArchivcde): MakeobjResponse
     {
         return $this->exec(
-        $workdir,
-        $this->toCommand(sprintf('EXTRACT %s', $pakFileArchivcde))
-    );
+            $dir,
+            $this->toCommand(sprintf('EXTRACT %s', $pakFileArchivcde))
+        );
     }
 
     /*
     * MakeObj EXPAND <output> <dat file(s)>.
     */
-// public function expand(string $output, array $datFiles): array;
+    // public function expand(string $output, array $datFiles): array;
 }

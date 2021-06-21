@@ -8,8 +8,9 @@ class ListTest extends TestCase
 {
     public function test()
     {
-        $path = __DIR__.'/example/example.all.pak';
-        $res = $this->getSUT()->list([$path]);
+        $dirpath = __DIR__.'/example';
+        $file = 'example.all.pak';
+        $res = $this->getSUT()->list($dirpath, $file);
 
         $this->assertEquals(0, $res->getCode());
         $this->assertInstanceOf(MakeobjResponse::class, $res);

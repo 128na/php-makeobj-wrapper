@@ -47,29 +47,29 @@ class Makeobj
         return $this->getDriver()->capabilities();
     }
 
-    public function list(array $pakFiles): MakeobjResponse
+    public function list(string $dir, string $pakFile): MakeobjResponse
     {
-        return $this->getDriver()->list($pakFiles);
+        return $this->getDriver()->list($dir, $pakFile);
     }
 
-    public function pak(int $size, string $dirPath, string $pakFile, array $datFiles, bool $debug = false): MakeobjResponse
+    public function pak(string $dir, int $size, string $pakFile, string $datFile, bool $debug = false): MakeobjResponse
     {
-        return $this->getDriver()->pak($size, $dirPath, $pakFile, $datFiles, $debug);
+        return $this->getDriver()->pak($dir, $size, $pakFile, $datFile, $debug);
     }
 
-    public function dump(array $pakFiles): MakeobjResponse
+    public function dump(string $dir, string $pakFile): MakeobjResponse
     {
-        return $this->getDriver()->dump($pakFiles);
+        return $this->getDriver()->dump($dir, $pakFile);
     }
 
-    public function merge(string $pakFileLibrary, array $pakFiles): MakeobjResponse
+    public function merge(string $dir, string $pakFileLibrary, string $pakFile): MakeobjResponse
     {
-        return $this->getDriver()->merge($pakFileLibrary, $pakFiles);
+        return $this->getDriver()->merge($dir, $pakFileLibrary, $pakFile);
     }
 
-    public function extract(string $workdir, string $pakFileArchivcde): MakeobjResponse
+    public function extract(string $dir, string $pakFileArchive): MakeobjResponse
     {
-        return $this->getDriver()->extract($workdir, $pakFileArchivcde);
+        return $this->getDriver()->extract($dir, $pakFileArchive);
     }
 
     // public function expand(string $output, array $datFiles): MakeobjResponse;

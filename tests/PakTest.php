@@ -15,17 +15,18 @@ class PakTest extends TestCase
 
     public function test()
     {
-        $dir = __DIR__.'/example';
-        $dat = 'example.dat';
-        $pak = 'testing.pak';
-        $this->assertFalse(file_exists($pak));
-        $res = $this->getSUT()->pak(64, $dir, $pak, [$dat]);
+        $dirpath = __DIR__.'/example';
+        $pakFile = 'testing.pak';
+        $datFile = 'example.dat';
+
+        $res = $this->getSUT()->pak($dirpath, 64, $pakFile, $datFile, true);
 
         $this->assertEquals(0, $res->getCode());
         $this->assertInstanceOf(MakeobjResponse::class, $res);
-        $this->assertTrue(file_exists($dir.'/'.$pak));
-        $this->assertStringContainsString('writing file testing', $res->getStdOut());
-        $this->assertStringContainsString('reading file example.dat', $res->getStdOut());
-        $this->assertStringContainsString('packing building.example', $res->getStdOut());
+        $this->assertTrue(file_exists($pakFile));
+        $this->assertStringContainsString('testing.pak', $res->getStdOut());
+        $this->assertStringContainsString('example.dat', $res->getStdOut());
+        $this->assertStringContainsString('building.example1', $res->getStdOut());
+        $this->assertStringContainsString('building.example2', $res->getStdOut());
     }
 }

@@ -8,8 +8,9 @@ class DumpTest extends TestCase
 {
     public function test()
     {
-        $path = __DIR__.'/example/example.all.pak';
-        $res = $this->getSUT()->dump([$path]);
+        $dirpath = __DIR__.'/example';
+        $pakFile = 'example.all.pak';
+        $res = $this->getSUT()->dump($dirpath, $pakFile);
 
         $this->assertEquals(0, $res->getCode());
         $this->assertInstanceOf(MakeobjResponse::class, $res);

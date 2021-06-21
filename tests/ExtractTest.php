@@ -16,10 +16,10 @@ class ExtractTest extends TestCase
 
     public function test()
     {
-        $merged = __DIR__.'/example/example.all.pak';
-        $dest = __DIR__.'/example/extract';
+        $dir = __DIR__.'/example/extract';
+        $pakFileLibrary = 'example.all.pak';
 
-        $res = $this->getSUT()->extract($dest, $merged);
+        $res = $this->getSUT()->extract($dir, $pakFileLibrary);
 
         $this->assertEquals(0, $res->getCode());
         $this->assertInstanceOf(MakeobjResponse::class, $res);
