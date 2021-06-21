@@ -14,7 +14,24 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  test-win:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8"
+
+      - name: Composer Install
+        run: composer install
+
+      - name: Test
+        run: ./vendor/bin/phpunit.bat -v
+
+  test-linux:
     runs-on: ubuntu-latest
 
     steps:
