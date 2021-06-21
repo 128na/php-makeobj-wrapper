@@ -13,7 +13,7 @@ class ListTest extends TestCase
 
         $this->assertEquals(0, $res->getCode());
         $this->assertInstanceOf(MakeobjResponse::class, $res);
-        $this->assertStringContainsString('example1', $res->__toString());
-        $this->assertStringContainsString('example2', $res->__toString());
+        $this->assertStringContainsString('example1', $res->getStdOut());
+        $this->assertStringContainsString('example2', $res->getStdOut());
     }
 }

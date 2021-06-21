@@ -24,8 +24,8 @@ class PakTest extends TestCase
         $this->assertEquals(0, $res->getCode());
         $this->assertInstanceOf(MakeobjResponse::class, $res);
         $this->assertTrue(file_exists($dir.'/'.$pak));
-        $this->assertStringContainsString('writing file testing', $res->__toString());
-        $this->assertStringContainsString('reading file example.dat', $res->__toString());
-        $this->assertStringContainsString('packing building.example', $res->__toString());
+        $this->assertStringContainsString('writing file testing', $res->getStdOut());
+        $this->assertStringContainsString('reading file example.dat', $res->getStdOut());
+        $this->assertStringContainsString('packing building.example', $res->getStdOut());
     }
 }

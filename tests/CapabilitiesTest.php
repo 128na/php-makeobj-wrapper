@@ -12,6 +12,6 @@ class CapabilitiesTest extends TestCase
 
         $this->assertEquals(0, $res->getCode());
         $this->assertInstanceOf(MakeobjResponse::class, $res);
-        $this->assertStringContainsString('This program can pack the following object types', $res->__toString());
+        $this->assertStringContainsString('This program can pack the following object types', $res->getStdOut());
     }
 }

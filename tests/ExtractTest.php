@@ -23,8 +23,8 @@ class ExtractTest extends TestCase
 
         $this->assertEquals(0, $res->getCode());
         $this->assertInstanceOf(MakeobjResponse::class, $res);
-        $this->assertStringContainsString('building.example1.pak', $res->__toString());
-        $this->assertStringContainsString('building.example2.pak', $res->__toString());
+        $this->assertStringContainsString('building.example1.pak', $res->getStdOut());
+        $this->assertStringContainsString('building.example2.pak', $res->getStdOut());
         $this->assertTrue(file_exists(__DIR__.'/example/extract/building.example1.pak'));
         $this->assertTrue(file_exists(__DIR__.'/example/extract/building.example2.pak'));
     }

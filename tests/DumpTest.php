@@ -13,6 +13,6 @@ class DumpTest extends TestCase
 
         $this->assertEquals(0, $res->getCode());
         $this->assertInstanceOf(MakeobjResponse::class, $res);
-        $this->assertStringContainsString('000 ROOT-node (root)', $res->__toString());
+        $this->assertStringContainsString('000 ROOT-node (root)', $res->getStdOut());
     }
 }

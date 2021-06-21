@@ -13,6 +13,6 @@ class VersionTest extends TestCase
 
         $this->assertEquals(3, $res->getCode());
         $this->assertInstanceOf(MakeobjResponse::class, $res);
-        $this->assertStringContainsString('Makeobj version', $res->__toString());
+        $this->assertStringContainsString('Makeobj version', $res->getStdErr());
     }
 }

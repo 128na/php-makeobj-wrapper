@@ -25,6 +25,6 @@ class MergeTest extends TestCase
         $this->assertEquals(0, $res->getCode());
         $this->assertInstanceOf(MakeobjResponse::class, $res);
         $this->assertTrue(file_exists($merged));
-        $this->assertStringContainsString('merged.pak', $res->__toString());
+        $this->assertStringContainsString('merged.pak', $res->getStdOut());
     }
 }

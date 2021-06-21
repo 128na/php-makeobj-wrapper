@@ -5,19 +5,21 @@ namespace _128Na\Simutrans\Makeobj;
 class MakeobjResponse
 {
     public string $command;
-    public array $output;
+    public string $stdout;
+    public string $stderr;
     public int $code;
 
-    public function __construct(string $command, array $output, int $code)
+    public function __construct(string $command, string $stdout, string $stderr, int $code)
     {
         $this->command = $command;
-        $this->output = $output;
+        $this->stdout = $stdout;
+        $this->stderr = $stderr;
         $this->code = $code;
     }
 
     public function __toString()
     {
-        return implode("\n", $this->output);
+        return "--- stdout ---\n{$this->stdout}\n--- stderr ---\n{$this->stderr}";
     }
 
     public function getCommand(): string
@@ -25,9 +27,24 @@ class MakeobjResponse
         return $this->command;
     }
 
-    public function getOutput(): array
+    public function getStdOut(): string
     {
-        return $this->output;
+        return $this->stdout;
+    }
+
+    public function getStdOutAsArray(): array
+    {
+        return explode("\n", $this->stdout);
+    }
+
+    public function getStdErr(): string
+    {
+        return $this->stderr;
+    }
+
+    public function getStdErrAsArray(): array
+    {
+        return explode("\n", $this->stderr);
     }
 
     public function getCode(): int

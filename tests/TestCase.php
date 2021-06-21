@@ -10,11 +10,10 @@ class TestCase extends FrameworkTestCase
 {
     protected function getSUT(): Makeobj
     {
-        $path = null;
-        if (isset($_ENV['makeobj_path'])) {
-            $path = realpath(__DIR__.$_ENV['makeobj_path']);
+        if ($_ENV['test_os'] === 'win') {
+            return new Makeobj(new MakeobjDriver(MakeobjDriver::OS_WIN));
         }
 
-        return new Makeobj(new MakeobjDriver($path));
+        return new Makeobj(new MakeobjDriver());
     }
 }
