@@ -2,19 +2,34 @@
 
 namespace _128Na\Simutrans\Makeobj;
 
+use _128Na\Simutrans\Makeobj\Driver\LinuxMakeobjDriver;
 use _128Na\Simutrans\Makeobj\Driver\MakeobjDriver;
+use _128Na\Simutrans\Makeobj\Driver\WinMakeobjDriver;
 
 class Makeobj
 {
-    public const OPTION_NONE = '';
-    public const OPTION_QUIET = 'QUIET';
-    public const OPTION_DEBUG = 'DEBUG';
+    public const OS_LINUX = 'linux';
+    public const OS_WIN = 'win';
+    public const OS_MAC = 'mac';
 
+    protected string $os;
     protected MakeobjDriver $driver;
 
-    public function __construct(MakeobjDriver $driver)
+    public function __construct(?string $os = self::OS_LINUX, ?string $makeobjPath = null)
     {
-        $this->driver = $driver;
+        $this->os = $os;
+        $this->driver = $this->setupDriver($makeobjPath = null);
+    }
+
+    protected function setupDriver(?string $makeobjPath = null): MakeobjDriver
+    {
+        switch ($this->os) {
+            case self::OS_WIN:
+                return new WinMakeobjDriver($makeobjPath = null);
+            case self::OS_LINUX:
+            default:
+                return new LinuxMakeobjDriver($makeobjPath = null);
+        }
     }
 
     public function getDriver(): MakeobjDriver

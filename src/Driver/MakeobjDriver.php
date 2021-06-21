@@ -4,35 +4,28 @@ namespace _128Na\Simutrans\Makeobj\Driver;
 
 use _128Na\Simutrans\Makeobj\MakeobjResponse;
 
-class MakeobjDriver
+abstract class MakeobjDriver
 {
     public const OPTION_NONE = '';
     public const OPTION_QUIET = 'QUIET';
     public const OPTION_DEBUG = 'DEBUG';
 
-    public const OS_LINUX = 'linux';
-    public const OS_WIN = 'win';
-    public const OS_MAC = 'mac';
-
-    private string $os;
     private string $makeobjPath;
 
-    public function __construct(?string $os = self::OS_LINUX, ?string $makeobjPath = null)
+    public function __construct(?string $makeobjPath = null)
     {
-        $this->os = $os ?? self::OS_LINUX;
         $this->makeobjPath = $makeobjPath ?? $this->getDefaultMakeobjPath();
     }
 
-    private function getDefaultMakeobjPath(): string
-    {
-        switch ($this->os) {
-            case self::OS_WIN:
-                return realpath(__DIR__.'/../../bin/makeobj-win-60-5/makeobj.exe');
-            case self::OS_LINUX:
-            default:
-                return realpath(__DIR__.'/../../bin/makeobj-linux-60-2/makeobj');
-        }
-    }
+    /**
+     * デフォルトのmakeobj実行ファイルのパス.
+     */
+    abstract protected function getDefaultMakeobjPath(): string;
+
+    /**
+     * 文字列内の改行コードを\nに統一する.
+     */
+    abstract protected function handleNewline(string $str): string;
 
     private function exec(string $baseDir, string $command): MakeobjResponse
     {
@@ -68,7 +61,12 @@ class MakeobjDriver
             chdir($current);
         }
 
-        return new MakeobjResponse($command, $stdout, $stderr, $code);
+        return new MakeobjResponse(
+            $command,
+            $this->handleNewline($stdout),
+            $this->handleNewline($stderr),
+            $code
+        );
     }
 
     /**
