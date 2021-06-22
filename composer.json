@@ -24,8 +24,5 @@
         "psr-4": {
             "Tests\\": "tests/"
         }
-    },
-    "scripts": {
-        "test": "vendor/bin/phpunit -c phpunit.linux.xml"
     }
 }
