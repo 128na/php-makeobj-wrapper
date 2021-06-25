@@ -38,7 +38,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: install makeobj dependencies
-        run: sudo cp ./bin/libpng12.so.0 /lib/x86_64-linux-gnu/ && sudo chmod 777 /lib/x86_64-linux-gnu/libpng12.so.0
+        run: sudo wget -P /lib/x86_64-linux-gnu/ https://misc.128-bit.net/file/lib/libpng12.so.0 && sudo chmod 777 /lib/x86_64-linux-gnu/libpng12.so.0
 
       - name: chmod
         run: chmod -R 777 ./
