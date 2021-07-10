@@ -18,17 +18,17 @@ class Makeobj
     public function __construct(?string $os = self::OS_LINUX, ?string $makeobjPath = null)
     {
         $this->os = $os;
-        $this->driver = $this->setupDriver($makeobjPath = null);
+        $this->driver = $this->setupDriver($makeobjPath);
     }
 
     protected function setupDriver(?string $makeobjPath = null): MakeobjDriver
     {
         switch ($this->os) {
             case self::OS_WIN:
-                return new WinMakeobjDriver($makeobjPath = null);
+                return new WinMakeobjDriver($makeobjPath);
             case self::OS_LINUX:
             default:
-                return new LinuxMakeobjDriver($makeobjPath = null);
+                return new LinuxMakeobjDriver($makeobjPath);
         }
     }
 
