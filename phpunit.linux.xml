@@ -13,5 +13,7 @@
   <php>
     <ini name="memory_limit" value="-1"/>
     <env name="test_os" value="linux"/>
+    <env name="makeobj_path" value="/usr/lib/simutrans/makeobj"/>
+
   </php>
 </phpunit>
