@@ -4,59 +4,62 @@ name: CI
 
 # Controls when the action will run.
 on:
-    # Triggers the workflow on push or pull request events but only for the main branch
-    push:
-        branches: [main]
-    pull_request:
-        branches: [main]
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
-    # Allows you to run this workflow manually from the Actions tab
-    workflow_dispatch:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
-    test-win:
-        runs-on: windows-latest
+  test-win:
+    runs-on: windows-latest
 
-        steps:
-            - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-            - name: PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: "8"
+      - name: PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8"
 
-            - name: Composer Install
-              run: composer install
+      - name: Composer Install
+        run: composer install
 
-            - name: Test
-              run: ./vendor/bin/phpunit.bat -v
+      - name: Test
+        run: ./vendor/bin/phpunit.bat -v
 
-    test-linux:
-        runs-on: ubuntu-latest
+  test-linux:
+    runs-on: ubuntu-latest
 
-        steps:
-            - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-            - name: install makeobj dependencies
-              run: sudo wget -P /lib/x86_64-linux-gnu/ https://simutrans.sakura.ne.jp/files/lib/libpng12.so.0 && sudo chmod 777 /lib/x86_64-linux-gnu/libpng12.so.0
+      - name: install makeobj via apt
+        run: apt-get install simutrans-makeobj
 
-            - name: chmod
-              run: chmod -R 777 ./
+      # - name: install makeobj dependencies
+      #   run: sudo wget -P /lib/x86_64-linux-gnu/ https://simutrans.sakura.ne.jp/files/lib/libpng12.so.0 && sudo chmod 777 /lib/x86_64-linux-gnu/libpng12.so.0
 
-            # - name: check makeobj dependencies
-            #   run: ldd ./bin/makeobj-linux-60-2/makeobj
-            # - name: check makeobj
-            #   run: ./bin/makeobj-linux-60-2/makeobj CAPABILITIES
-            # - name: confirm
-            #   run: ls -la /home/runner/work/php-makeobj-wrapper/php-makeobj-wrapper/tests/../bin/makeobj-linux-60-2/
+      - name: chmod
+        run: chmod -R 777 ./
 
-            - name: PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: "8"
+      # - name: check makeobj dependencies
+      #   run: ldd ./bin/makeobj-linux-60-2/makeobj
+      # - name: check makeobj
+      #   run: ./bin/makeobj-linux-60-2/makeobj CAPABILITIES
+      # - name: confirm
+      #   run: ls -la /home/runner/work/php-makeobj-wrapper/php-makeobj-wrapper/tests/../bin/makeobj-linux-60-2/
 
-            - name: Composer Install
-              run: composer install
+      - name: PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8"
 
-            - name: Test
-              run: ./vendor/bin/phpunit -c phpunit.linux.xml -v
+      - name: Composer Install
+        run: composer install
+
+      - name: Test
+        run: ./vendor/bin/phpunit -c phpunit.linux.xml -v
