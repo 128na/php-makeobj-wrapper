@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: install makeobj
-        shell: powershell
+        shell: pwsh
         run: |
           wget -O makeobj.zip https://master.dl.sourceforge.net/project/simutrans/makeobj/60-5%20for%20122-0%20up/makeobj-win-60-5.zip?viasf=1
           Expand-Archive makeobj.zip
