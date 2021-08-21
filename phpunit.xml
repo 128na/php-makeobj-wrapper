@@ -13,6 +13,6 @@
   <php>
     <ini name="memory_limit" value="-1"/>
     <env name="test_os" value="win"/>
-    <env name="makeobj_path" value="./makeobj/Makeobj.exe"/>
+    <env name="makeobj_path" value="D:\a\php-makeobj-wrapper\php-makeobj-wrapper\makeobj\Makeobj.exe"/>
   </php>
 </phpunit>
