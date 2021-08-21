@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: install makeobj
+      - name: install makeobj via sourceforge
         shell: powershell
         run: |
           wget -O makeobj.zip https://master.dl.sourceforge.net/project/simutrans/makeobj/60-5%20for%20122-0%20up/makeobj-win-60-5.zip?viasf=1
