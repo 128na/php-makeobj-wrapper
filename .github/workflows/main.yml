@@ -38,7 +38,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: install makeobj via apt
-        run: apt-get install simutrans-makeobj
+        run: apt install -y simutrans-makeobj
 
       # - name: install makeobj dependencies
       #   run: sudo wget -P /lib/x86_64-linux-gnu/ https://simutrans.sakura.ne.jp/files/lib/libpng12.so.0 && sudo chmod 777 /lib/x86_64-linux-gnu/libpng12.so.0
