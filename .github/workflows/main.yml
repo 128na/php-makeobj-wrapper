@@ -24,7 +24,7 @@ jobs:
         shell: powershell
         run: |
           wget -O makeobj.zip https://master.dl.sourceforge.net/project/simutrans/makeobj/60-5%20for%20122-0%20up/makeobj-win-60-5.zip?viasf=1
-          Expand-Archive akeobj.zip
+          Expand-Archive makeobj.zip
           dir
 
       - name: PHP
